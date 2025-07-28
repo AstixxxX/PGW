@@ -15,9 +15,9 @@ PGW (Packet Gateway) is a network session management system consisting of three 
 **Purpose**: Initiates sessions by sending IMSI to server  
 
 **Functions**:  
-   - Sends IMSI via UDP  
-   - Waits for session status response   
-   - Logs results  
+   - Send IMSI via UDP  
+   - Wait for session status response   
+   - Log results  
 
 **Configuration**: (client_config.json)
 
