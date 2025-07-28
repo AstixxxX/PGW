@@ -52,9 +52,7 @@ PGW (Packet Gateway) is a network session management system consisting of three 
 **Purpose**: Remote control of PGW server
 
 **Functions**
-- Port: 8080 (default)
-- Functions:
-    - Session monitoring
-    - System configuration
+ - Session monitoring
+ - System configuration
 
 **Configuration** (server url)
