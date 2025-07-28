@@ -1,58 +1,50 @@
 # Packet Gateway (PGW) System
 
 ## Overview
+The Packet Gateway (PGW) is a network session management system that handles communication between mobile devices and network services. It consists of three core interconnected components:
 
-PGW (Packet Gateway) is a network session management system consisting of three interconnected components:
+1. **PGW Client** - Initiates sessions via UDP requests  
+2. **PGW Server** - Processes and manages sessions  
+3. **Web Panel** - Provides monitoring and control interface  
 
-1. **PGW Client** - sends UDP requests  
-2. **PGW Server** - processes sessions  
-3. **Web Panel**  - management interface  
+## System Components
 
-## System Components  
-
-### 1. PGW Client  
-
-**Purpose**: Initiates sessions by sending IMSI to server  
+### 1. PGW Client
+**Purpose**: Initiates device sessions by transmitting IMSI to the server.  
 
 **Functions**:  
-   - Send IMSI via UDP  
-   - Wait for session status response   
-   - Log results  
-
-**Configuration**: (client_config.json)
+- Send IMSI payloads via UDP protocol  
+- Await session status responses from server  
+- Log transaction results  
+- **Configuration**: `client_config.json`  
 
 ### 2. PGW Server
+**Purpose**: Creates, maintains, and terminates mobile device sessions.  
 
-**Purpose**: Create and update sessions with mobile devices (clients)
+**Core Components**:  
+1. **UDP Server**  
+   - Default Port: `10000`  
+   - Functions:  
+     - Receives IMSI payloads from clients  
+     - Generates UDP response packets  
+     - Logs all incoming requests  
 
-**Server Components**:
-1. **UDP Server**
-   - Port: 10000 (default)
-   - Functions:
-     - Receives IMSI from clients
-     - Generates UDP response packets
-     - Logs incoming requests
+2. **HTTP Server**  
+   - Default Port: `8080`  
+   - API Endpoints:  
+     - `POST /api/check_subscriber` - Verify session status by IMSI  
+     - `POST /api/stop` - Gracefully terminate PGW Server  
 
-2. **HTTP Server**
-   - Port: 8080 (default)
-   - API Endpoints:
-     - `POST /api/check_subscriber` - check session by IMSI
-     - `POST /api/stop` - stop the PGW server
-
-3. **Session Controller**
-   - Workflow:
-     - Receives IMSI from UDP Server
-     - Makes access decision
-     - Forms response for client
-
-**Configuration**: (server_config.json)
+3. **Session Controller**  
+   - Workflow:  
+     - Receives IMSI from UDP Server  
+     - Makes access control decisions  
+   - **Configuration**: `server_config.json`  
 
 ### 3. PGW Web Interface
+**Purpose**: Remote administration and monitoring of PGW Server.  
 
-**Purpose**: Remote control of PGW server
-
-**Functions**
- - Session monitoring
- - System configuration
-
-**Configuration** (server url)
+**Functions**:  
+- Real-time session monitoring  
+- System configuration management  
+- **Configuration**: Requires PGW Server URL  
